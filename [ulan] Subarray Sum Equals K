@@ -1,0 +1,31 @@
+var subarraySum = function(nums, k) {
+    let prefixSum = [];
+    let map = new Map();
+    map.set(0, 1);
+    let sum = 0;
+
+    for(let i=0; i<nums.length; i++){
+        sum = sum + nums[i];
+        prefixSum[i] = sum;
+        
+    }
+    
+    let counter = 0;
+    for(let i=0; i<prefixSum.length; i++){
+        
+        let looking = prefixSum[i] - k;
+        
+        if(map.has(looking)) {
+            counter = counter + map.get(looking);
+        }
+        
+        if(!map.has(prefixSum[i])){
+            map.set(prefixSum[i], 1)
+        } else{
+            map.set(prefixSum[i], map.get(prefixSum[i]) + 1)
+        }
+        
+    }
+
+    return counter;
+};

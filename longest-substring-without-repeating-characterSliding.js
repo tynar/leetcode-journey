@@ -1,15 +1,18 @@
-var lengthOfLongestSubstring = function (s) {
+var lengthOfLongestSubstring = function (inputString) {
   let left = 0;
   let right = 0;
   let max = 0;
-  let obj = {};
-  while (right < s.length) {
-    if (obj[s[right]] >= 0 && left <= obj[s[right]]) {
-      left = obj[s[right]] + 1;
+  let lookupLibrary = {};
+  while (right < inputString.length) {
+    if (
+      lookupLibrary[inputString[right]] >= 0 &&
+      left <= lookupLibrary[inputString[right]]
+    ) {
+      left = lookupLibrary[inputString[right]] + 1;
     } else {
       max = Math.max(max, right - left + 1);
     }
-    obj[s[right]] = right;
+    lookupLibrary[inputString[right]] = right;
     right++;
   }
   return max;
